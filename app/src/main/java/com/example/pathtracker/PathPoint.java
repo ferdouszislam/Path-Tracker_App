@@ -115,10 +115,15 @@ public class PathPoint {
 
     @Override
     public String toString() {
-        return "PathPoint{" +
-                "distance=" + distance +
-                ", angle=" + Math.toDegrees(angle) +
-                ", angleWithX=" + Math.toDegrees(angleWithX) +
+        return "{" +
+                "distance=" + showTwoDecimals(distance) +
+                ", angle=" + Math.floor(Math.toDegrees(angle)) +
+                ", angleWithX=" + Math.floor( Math.toDegrees(angleWithX) ) +
                 '}';
     }
+
+    private double showTwoDecimals(double n){
+        return Math.floor(n*100) / 100.00d;
+    }
+
 }

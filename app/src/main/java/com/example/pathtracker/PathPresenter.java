@@ -16,6 +16,8 @@ public class PathPresenter {
     // objects to measure distance from acceleration
     PathPoint pathPoint = new PathPoint();
 
+    // constants
+    private static final double MINIMUM_CALCULABLE_DISTANCE = 0.5;
 
     public PathPresenter(PathView pathView) {
         this.pathView = pathView;
@@ -106,7 +108,16 @@ public class PathPresenter {
 
         // Voila!!
         pathView.showPathPoint(pathPoint.toString());
-        pathView.plotPoint(pathPoint.getDistance(), pathPoint.getAngleWithX());
+
+        //TODO: calculate latitude, longitude from 'pathPoint.getDistance()', 'pathPoint.getAngle()'
+        if(pathPoint.getDistance()<MINIMUM_CALCULABLE_DISTANCE) //smaller than 20cm, average step size ~ 76cm
+            return;
+
+        // plot in graph for now
+        double x, y;
+        x = pathPoint.getDistance() * Math.cos(pathPoint.getAngleWithX());
+        y = pathPoint.getDistance() * Math.sin(pathPoint.getAngleWithX());
+        pathView.plotPoint(x, y);
     }
 
     public void updateSensorAvailability(Sensor sensor){

@@ -13,7 +13,7 @@ public class LinearAccelerationData {
     private boolean available = true;
 
     //@Exclude
-    private double startTime=-1, timePassed = 0; // unit: nano seconds
+    private double startTime=-1, totalTimePassed = 0; // unit: nano seconds
     //@Exclude
     private static final double nanoToS = 1.0d / 1000000000.0d;
 
@@ -31,9 +31,9 @@ public class LinearAccelerationData {
         if(startTime==-1)
             startTime = time;
 
-        dt = (time-startTime) - timePassed;
+        dt = (time-startTime) - totalTimePassed;
 
-        timePassed = time-startTime;
+        totalTimePassed = time-startTime;
 
     }
 
@@ -73,9 +73,7 @@ public class LinearAccelerationData {
         this.startTime = startTime;
     }
 
-    public double getTimePassed() {
-        return timePassed;
-    }
+    public double getTotalTimePassed() { return totalTimePassed; }
 
     public boolean isAvailable() {
         return available;
@@ -92,7 +90,7 @@ public class LinearAccelerationData {
                 ", yValue=" + showTwoDecimals(yValue) +
                 ", zValue=" + showTwoDecimals(zValue) +
                 ", dt=" + showTwoDecimals(dt*nanoToS) +
-                ", timePassed=" + showTwoDecimals(timePassed*nanoToS) +
+                ", timePassed=" + showTwoDecimals(totalTimePassed*nanoToS) +
                 '}';
     }
 
