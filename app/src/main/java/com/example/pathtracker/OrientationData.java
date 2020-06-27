@@ -2,7 +2,10 @@ package com.example.pathtracker;
 
 public class OrientationData {
 
-    /*
+    /* TODO: complete the explanation
+
+    holds raw & calculated(by API) data from rotation vector sensor(software sensor)
+
     explanation of azimuth, pitch, roll
 
     azimuth:
@@ -29,9 +32,7 @@ public class OrientationData {
         return azimuth;
     }
 
-    public void setAzimuth(double azimuth) {
-        this.azimuth = azimuth;
-    }
+    public void setAzimuth(double azimuth) { this.azimuth = azimuth; }
 
     public double getPitch() {
         return pitch;

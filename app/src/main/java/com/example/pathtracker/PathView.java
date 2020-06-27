@@ -6,4 +6,6 @@ public interface PathView {
 
     void showPathPoint(String message);
 
+    void plotPoint(double distance, double angle);
+
 }

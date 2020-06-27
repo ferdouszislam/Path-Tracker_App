@@ -16,9 +16,11 @@ public class PathPresenter {
     // objects to measure distance from acceleration
     PathPoint pathPoint = new PathPoint();
 
+
     public PathPresenter(PathView pathView) {
         this.pathView = pathView;
     }
+
 
     public void updateSensorValues(SensorEvent event){
 
@@ -73,7 +75,6 @@ public class PathPresenter {
 
 
         // compute acceleration x-component
-
         roll = Math.abs(orientationData.getRoll());
         accelerationXComponent += linearAccelerationData.getxValue() * Math.cos(roll); // x-component due to x acceleration
         double zxAngle = Math.abs( Math.toRadians(90) - roll );
@@ -84,7 +85,6 @@ public class PathPresenter {
 
 
         // compute acceleration y-component
-
         pitch = Math.abs(orientationData.getPitch());
         accelerationYComponent += linearAccelerationData.getyValue() * Math.cos(pitch); // y-component due to y acceleration
         double zyAngle = Math.toRadians(90) - pitch;
@@ -94,11 +94,19 @@ public class PathPresenter {
         // compute distance from acceleration
         pathPoint.setupXDistance(accelerationXComponent, linearAccelerationData.getDt());
         pathPoint.setupYDistance(accelerationYComponent, linearAccelerationData.getDt());
-        // TODO: calculate angle by properly using azimuth value
-        //pathPoint.computeDistanceAndAngle(  );
+
+
+        // compute direction of movement
+        azimuth = orientationData.getAzimuth();
+        if(azimuth<0)
+            azimuth+=Math.toRadians(360);
+
+        // Finally
+        pathPoint.computeFinalDistanceAndAngle(azimuth);
 
         // Voila!!
         pathView.showPathPoint(pathPoint.toString());
+        pathView.plotPoint(pathPoint.getDistance(), pathPoint.getAngleWithX());
     }
 
     public void updateSensorAvailability(Sensor sensor){

@@ -72,7 +72,7 @@ public class PathActivity extends AppCompatActivity implements PathView, SensorE
     protected void onPause() {
         super.onPause();
 
-        // stop sensors (?)
+        // stop sensors (here?)
         sensorManager.unregisterListener(this);
     }
 
@@ -105,6 +105,16 @@ public class PathActivity extends AppCompatActivity implements PathView, SensorE
         Log.d(TAG, "showOrientationAngles: "+message);
 
         debugText.setText(message);
+
+    }
+
+    @Override
+    public void plotPoint(double distance, double angle) {
+
+        //TODO: implement graph
+        double x, y;
+        x = distance*Math.cos(angle);
+        y = distance*Math.sin(angle);
 
     }
 }

@@ -2,6 +2,14 @@ package com.example.pathtracker;
 
 public class DistanceComponent {
 
+    /*
+
+    get distance from acceleration using classical kinematics formulas
+
+    only "PathPoint" class has a object as a member variable of this class
+
+     */
+
     private double s=0, u=0, a=0, t=0;
 
     public DistanceComponent() {
